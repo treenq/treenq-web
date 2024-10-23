@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import { createZitadelAuth } from '@zitadel/react'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css'
+import auth from "./auth"
+
+//regular ui components and general components
+import Login from "./components/Login"
+import Callback from "./components/Callback"
+
+//shadcd ui components
+import { Slider } from "@/components/ui/slider"
 
 function App() {
-  const [count, setCount] = useState(0)
+  //setting up the config
+  const zitadel = auth
+
+  function login() {
+    zitadel.authorize()
+  }
+
+  function signout() {
+    zitadel.signout()
+  }
+
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    zitadel.userManager.getUser().then((user) => {
+      if (user) {
+        setAuthenticated(true)
+      } else {
+        setAuthenticated(false)
+      }
+    })
+  }, [zitadel])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="w-full flex justify-center items-center flex-col">
+      {/* Title for the auth page */}
+      <header className="w-full flex flex-col justify-center items-center text-center">
+        <h1 className="auth-title">Welcome to Treenq</h1>
+      </header>
+      {/* The login card for the auth page */}
+      <div className="flex justify-center items-end w-96 h-[456px] rounded-md bg-[transparent]">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<Login authenticated={authenticated} handleLogin={login} />}
+            />
+            <Route
+              path="/callback"
+              element={
+                <Callback
+                  authenticated={authenticated}
+                  setAuth={setAuthenticated}
+                  handleLogout={signout}
+                  userManager={zitadel.userManager}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
 export default App
