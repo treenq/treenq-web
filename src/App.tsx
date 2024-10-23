@@ -9,7 +9,8 @@ import Login from "./components/Login"
 import Callback from "./components/Callback"
 
 //shadcd ui components
-import { Slider } from "@/components/ui/slider"
+import { Button } from "@/components/ui/button"
+
 
 function App() {
   //setting up the config
@@ -42,7 +43,7 @@ function App() {
         <h1 className="auth-title">Welcome to Treenq</h1>
       </header>
       {/* The login card for the auth page */}
-      <div className="flex justify-center items-end w-96 h-[456px] rounded-md bg-[transparent]">
+      <div className=" flex justify-center items-end w-96 h-[456px] rounded-md ">
         <BrowserRouter>
           <Routes>
             <Route
