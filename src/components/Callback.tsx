@@ -20,11 +20,16 @@ const Callback = ({
   useEffect(() => {
     if (authenticated === null) {
       userManager.signinRedirectCallback().then((user: any) => {
+        console.log("User object: ", user)//taking a look at the user object
         if (user) {
           //saving the tokens to local storage
-          localStorage.setItem("access_token", user.access_token)
-          localStorage.setItem("refresh_token", user.refresh_token)
-          localStorage.setItem("id_token", user.id_token)
+          localStorage.setItem("access_token", JSON.stringify({
+            accessToken: user.access_token,
+            refreshToken: user.refresh_token,
+            expiresIn: user.expires_in,
+          }));
+          
+          
 
           setAuth(true)
           //if needed put navigation here

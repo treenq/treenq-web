@@ -11,10 +11,10 @@ const Login = ({ authenticated, handleLogin }: Props) => {
             {authenticated === null && <div>Loading...</div> }
             {authenticated === false && (
                 <div>
-                    <button className="w-[180px] bg-[#eee] rounded font-bold" onClick={() => {
+                    <button className="w-[180px] bg-[#eee] rounded font-bold mb-6" onClick={() => {
                         handleLogin()
                     }}>
-                        Login
+                        Sign in
                     </button>
                 </div>
             )}
