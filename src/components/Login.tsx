@@ -13,7 +13,7 @@ const Login = ({ authenticated, handleLogin }: Props) => {
             {authenticated === null && <div>Loading...</div> }
             {authenticated === false && (
                 <div>
-                    <Button variant="outline" className="bg-primary w-[180px] bg-[#eee] rounded font-bold mb-6" onClick={() => {
+                    <Button onClick={() => {
                         handleLogin()
                     }}>
                         Sign in
