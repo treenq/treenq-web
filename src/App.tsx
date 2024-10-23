@@ -1,15 +1,10 @@
 import { useState, useEffect } from 'react'
-import { createZitadelAuth } from '@zitadel/react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
 import auth from "./auth"
 
 //regular ui components and general components
 import Login from "./components/Login"
 import Callback from "./components/Callback"
-
-//shadcd ui components
-import { Button } from "@/components/ui/button"
 
 
 function App() {
