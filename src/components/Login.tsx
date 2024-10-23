@@ -1,4 +1,6 @@
 import { Navigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+
 
 type Props = {
     handleLogin: () => void
@@ -11,11 +13,11 @@ const Login = ({ authenticated, handleLogin }: Props) => {
             {authenticated === null && <div>Loading...</div> }
             {authenticated === false && (
                 <div>
-                    <button className="w-[180px] bg-[#eee] rounded font-bold mb-6" onClick={() => {
+                    <Button onClick={() => {
                         handleLogin()
                     }}>
                         Sign in
-                    </button>
+                    </Button>
                 </div>
             )}
             {authenticated && <Navigate to="/callback" />}
