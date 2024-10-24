@@ -5,7 +5,7 @@ const config: ZitadelConfig = {
     client_id: import.meta.env.ZITADEL_CLIENT_ID,
     redirect_uri: import.meta.env.ZITADEL_REDIRECT_URI,
     response_type: import.meta.env.ZITADEL_RESPONSE_TYPE,
-    scope: import.meta.env.ZITADEL_SCOPE,
+    scope: "openid profile email repo",
     post_logout_redirect_uri: import.meta.env.ZITADEL_LOGOUT_URI,
     response_mode: import.meta.env.ZITADEL_RESPONSE_MODE,
   };
