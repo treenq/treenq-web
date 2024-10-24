@@ -1,13 +1,13 @@
 import { createZitadelAuth } from "@zitadel/react";
 
 const config: ZitadelConfig = {
-    authority: "https://treenq-muevuz.us1.zitadel.cloud",
-    client_id: "288885563849778336",
-    redirect_uri: "http://localhost:3000/callback",
-    response_type: "code",
-    scope: "openid profile email repo",
-    post_logout_redirect_uri: "http://localhost:3000",
-    response_mode: "query",
+    authority: import.meta.env.VITE_ZITADEL_AUTHORITY,
+    client_id: import.meta.env.VITE_ZITADEL_CLIENT_ID,
+    redirect_uri: import.meta.env.VITE_ZITADEL_REDIRECT_URI,
+    response_type: import.meta.env.VITE_ZITADEL_RESPONSE_TYPE,
+    scope: import.meta.env.VITE_ZITADEL_SCOPE,
+    post_logout_redirect_uri: import.meta.env.VITE_ZITADEL_LOGOUT_URI,
+    response_mode: import.meta.env.VITE_ZITADEL_RESPONSE_MODE,
   };
 
   const auth = createZitadelAuth(config)
