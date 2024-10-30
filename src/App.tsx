@@ -1,35 +1,39 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import auth from "./auth"
+import config from "./auth"
 
 //regular ui components and general components
 import Login from "./components/Login"
 import Callback from "./components/Callback"
 
+import { UserManager, WebStorageStateStore } from "oidc-client-ts";
+
 
 function App() {
-  //setting up the config
-  const zitadel = auth
+  const userManager = new UserManager({
+    userStore: new WebStorageStateStore({store: window.localStorage}),
+    ...config,
+  })
 
   function login() {
-    zitadel.authorize()
+    userManager.signinRedirect()
   }
 
   function signout() {
-    zitadel.signout()
+    userManager.signoutRedirect()
   }
 
   const [authenticated, setAuthenticated] = useState<boolean | null>(null)
 
   useEffect(() => {
-    zitadel.userManager.getUser().then((user) => {
+    userManager.getUser().then((user) => {
       if (user) {
         setAuthenticated(true)
       } else {
         setAuthenticated(false)
       }
     })
-  }, [zitadel])
+  }, [])
 
   return (
     <div className="w-full flex justify-center items-center flex-col">
@@ -52,7 +56,7 @@ function App() {
                   authenticated={authenticated}
                   setAuth={setAuthenticated}
                   handleLogout={signout}
-                  userManager={zitadel.userManager}
+                  userManager={userManager}
                 />
               }
             />

@@ -1,14 +1,14 @@
-import { createZitadelAuth } from "@zitadel/react";
+import { UserManagerSettings } from "oidc-client-ts";
 
-const config: ZitadelConfig = {
-    authority: import.meta.env.ZITADEL_AUTHORITY,
-    client_id: import.meta.env.ZITADEL_CLIENT_ID,
-    redirect_uri: import.meta.env.ZITADEL_REDIRECT_URI,
-    response_type: import.meta.env.ZITADEL_RESPONSE_TYPE,
-    scope: "openid profile email repo",
-    post_logout_redirect_uri: import.meta.env.ZITADEL_LOGOUT_URI,
-    response_mode: import.meta.env.ZITADEL_RESPONSE_MODE,
-  };
+const config: UserManagerSettings = {
+  authority: ENV.ZITADEL_AUTHORITY,
+  client_id: ENV.ZITADEL_CLIENT_ID,
+  redirect_uri: ENV.ZITADEL_REDIRECT_URI,
+  response_type: "code",
+  scope: "openid profile email",
+  post_logout_redirect_uri: ENV.ZITADEL_LOGOUT_URI,
+  response_mode: "query",
+  prompt: "create",
+};
 
-  const auth = createZitadelAuth(config)
-  export default auth
+export default config;
